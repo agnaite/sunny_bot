@@ -18,9 +18,15 @@ bot = Cinch::Bot.new do
 	end
 	
 	on :message, "!temp" do |m|
+		
+		# grab weather document
 		doc = Nokogiri::HTML(open("http://www.briansutton.com/wx/weather.html?id=USFL0163&mode=&unit=m&#current"))
+		
+		# get temperature
 		temperature = doc.css('.style2')[1].content
-		m.reply "the temperature in Gainesville, FL is: #{temperature}"
+		
+		# say what the temperature is!
+		m.reply "#{m.user} the temperature in Gainesville, FL is: #{temperature}"
 	end
 end
 

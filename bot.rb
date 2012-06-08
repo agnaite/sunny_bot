@@ -8,9 +8,9 @@ require 'open-uri'
 
 bot = Cinch::Bot.new do
 	configure do |c|
-		c.server = "irc.freenode.org"
+		c.server   = "irc.freenode.org"
 		c.channels = ["#heyaudy"]
-		c.nick = "agnaite_"
+		c.nick     = "sunny_bot"
 	end
 	
 	on :message, "agnaite" do |m|
@@ -18,7 +18,7 @@ bot = Cinch::Bot.new do
 	end
 	
 	on :message, "!temp" do |m|
-		doc = Nokogiri::HTML(open("http://www.briansutton.com/wx/weather.html?id=USFL0163&length=10&unit=s&#current"))
+		doc = Nokogiri::HTML(open("http://www.briansutton.com/wx/weather.html?id=USFL0163&mode=&unit=m&#current"))
 		temperature = doc.css('.style2')[1].content
 		m.reply "the temperature in Gainesville, FL is: #{temperature}"
 	end

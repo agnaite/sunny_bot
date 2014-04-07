@@ -1,9 +1,11 @@
 require 'open-uri'
 
+ForecastIO.api_key = ENV['FORECAST_API_KEY']
+
+def weather
+  ForecastIO.forecast('29.651997', '-82.324992' , params: { units: 'si' })
+end
+
 def latest_temperature
-  # grab weather document
-  doc = Nokogiri::HTML(open("http://www.briansutton.com/wx/weather.html?id=USFL0163&mode=&unit=m&#current"))
-  
-  # get temperature
-  temperature = doc.css('.style2')[1].content
+  weather['currently']['temperature']
 end
